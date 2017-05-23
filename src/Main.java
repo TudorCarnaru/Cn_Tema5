@@ -34,7 +34,7 @@ public class Main {
         newMatrix.showT_Matrix();
 
         //Primul algoritm
-        /*
+/*
         Double[][] V0= startMatrix(newMatrix,n);
         Double[][] V1 = startMatrix(newMatrix,n);
         Double norma = 0.0;
@@ -54,10 +54,17 @@ public class Main {
             norma=calc_Norma(aux,n);
             numarInteratii++;
         }while(norma>=precizia && numarInteratii<=kmax && norma<=Math.pow(10,10));
+        Double[][] aux = new Double[n][n];
+        Double[][] I= createI(n);
+        aux=multiplyMatrix(newMatrix.getMaxtrix(),V1,n);
+        I=subtract_Matrixes(aux,I,n);
+        norma= calc_Norma(I,n);
         System.out.println("Matricea Finala");
         afisare(V1,n);
-        System.out.println(numarInteratii);
-        */
+        System.out.println("Numarul de iteratii " + numarInteratii);
+        System.out.println("Norma este ");
+        System.out.println(norma);
+*/
 
 
 
@@ -83,10 +90,17 @@ public class Main {
             norma=calc_Norma(aux,n);
             numarInteratii++;
         }while(norma>=precizia && numarInteratii<=kmax && norma<=Math.pow(10,10));
+        Double[][] aux = new Double[n][n];
+        Double[][] I= createI(n);
+        aux=multiplyMatrix(newMatrix.getMaxtrix(),V1,n);
+        I=subtract_Matrixes(aux,I,n);
+        norma= calc_Norma(I,n);
         System.out.println("Matricea Finala");
         afisare(V1,n);
-        System.out.println(numarInteratii);
-        */
+        System.out.println("Numarul de iteratii " + numarInteratii);
+        System.out.println("Norma este ");
+        System.out.println(norma);
+*/
 
 
         //Al 3-lea algoritm
@@ -103,7 +117,7 @@ public class Main {
             V0=copyMatrix(V0,V1,n);
             Double[][] aux = new Double[n][n];
             aux = copyMatrix(aux,V0,n);
-            aux = multiplyMatrix(newMatrix.getMaxtrix(),V0,n);
+            aux = multiplyMatrix(V0,newMatrix.getMaxtrix(),n);
             I3= subtract_Matrixes(I3,aux,n);
             I3 = multiplyMatrix(I3,I3,n);
             I = subtract_Matrixes(I,aux,n);
@@ -111,14 +125,21 @@ public class Main {
             Double scale = 0.25;
             I = scaleMatrix(I,scale,n);
             I4 = add_Matrixes(I,I4,n);
-            V1= multiplyMatrix(V0,I4,n);
+            V1= multiplyMatrix(I4,V0,n);
             aux = subtract_Matrixes(V1,V0,n); // de aici se calculeaza norma
             norma=calc_Norma(aux,n);
             numarInteratii++;
         }while(norma>=precizia && numarInteratii<=kmax && norma<=Math.pow(10,10));
+        Double[][] aux ;
+        Double[][] I= createI(n);
+        aux=multiplyMatrix(newMatrix.getMaxtrix(),V1,n);
+        I=subtract_Matrixes(aux,I,n);
+        norma= calc_Norma(I,n);
         System.out.println("Matricea Finala");
         afisare(V1,n);
-        System.out.println(numarInteratii);
+        System.out.println("Numarul de iteratii " + numarInteratii);
+        System.out.println("Norma este ");
+        System.out.println(norma);
 
     }
 
@@ -190,7 +211,7 @@ public class Main {
         {
             for( int j=0;j<size;j++)
             {
-                resultMatrix[i][j] = matrix[i][j]+scale;
+                resultMatrix[i][j] = matrix[i][j]*scale;
             }
         }
         return resultMatrix;
